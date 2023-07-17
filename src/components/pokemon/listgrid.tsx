@@ -32,8 +32,6 @@ const ListGridPokemon: React.FC = () => {
             setPokemons([...posts]);
         },[loading])
 
-
-
    const changeFavorite = (rec: any) =>{  
       posts.filter(function(x:any) { 
           if(x.id == rec.id)
@@ -49,7 +47,7 @@ const ListGridPokemon: React.FC = () => {
         
         if(e.target.checked == true)
         {
-            console.log(`checked = ${e.target.checked}`);
+        
             setIsChecked(true);
            setPokemons([...pokemons.filter(function(x:any) { return x.isfavorite == true}  )])
         }
