@@ -1,4 +1,4 @@
-import { Button, Input, Modal } from "antd";
+import { Button, Input, Image,Modal } from "antd";
 import React, { useEffect, useState } from 'react';
 import { StarOutlined, StarFilled, EditOutlined } from '@ant-design/icons';
 import { Spin, Table } from 'antd';
@@ -20,6 +20,7 @@ const ListFavorites: React.FC = () => {
           return posts} );
           setFavoritePokemons(posts.filter(function(x:any) { return x.isfavorite == true}));
       }
+
 
   const renameFavorite = (rec:any)=>{
     
@@ -61,9 +62,19 @@ const ListFavorites: React.FC = () => {
           sorter: (a : any, b: any) => a.name.localeCompare(b.title)
         },
         {
-          title: 'Url',
-          dataIndex: 'url',
-          key: 'url',
+          title: 'Image',
+          render: (item: any) =>{
+            return (
+                <div className='items-center'>
+                  <Image
+                            key={item.id}
+                            height={50}
+                            width={50}
+                            src={item.url}
+                         /> 
+                 </div>
+            )
+        }
         },
         {
           title: 'Favorite',
@@ -90,6 +101,7 @@ const ListFavorites: React.FC = () => {
 
      useEffect(()=>{
       setFavoritePokemons(posts.filter(function(x:any) { return x.isfavorite == true}));
+     
      },[loading])
    return(
     <>

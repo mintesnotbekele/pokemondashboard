@@ -7,6 +7,7 @@ import { Link, Route, Routes } from 'react-router-dom';
 import ListPokemon from './components/pokemon/list';
 import ListFavorites from './components/pokemon/listfav';
 import ListGridPokemon from './components/pokemon/listgrid';
+import FavoriteGridPokemon from './components/pokemon/favoritegrid';
 
 const { Header, Content, Footer, Sider } = Layout;
 const TopLayer: React.FC = () => {
@@ -45,6 +46,9 @@ const TopLayer: React.FC = () => {
                         <MenuItem key="allgrid" icon={React.createElement(StarOutlined)} >
                         <Link to="/allgrid">All Pokemon Grid </Link>
                         </MenuItem>
+                        <MenuItem key="favoritegrid" icon={React.createElement(StarOutlined)} >
+                        <Link to="/favoritegrid">Favorite Pokemon Grid </Link>
+                        </MenuItem>
 
                     </Menu>
                 </Sider>
@@ -53,7 +57,9 @@ const TopLayer: React.FC = () => {
                         <Route path="/" element={<ListPokemon />}>
                         </Route>
                         <Route path="/favorites" element={<ListFavorites />}></Route>
-                        <Route path="/allgrid" element={<ListGridPokemon />}>
+                        <Route path="/allgrid" element={<ListGridPokemon />}></Route>
+                        <Route path="/favoritegrid" element={<FavoriteGridPokemon />}>
+                        
                         </Route>
                     </Routes>
                 </Content>

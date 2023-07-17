@@ -90,7 +90,7 @@ const ListGridPokemon: React.FC = () => {
                             key={item.id}
                             height={50}
                             width={50}
-                            src={logo}
+                            src={item.url}
                          /> 
                          <p>{item.name}</p>
                          <hr/>

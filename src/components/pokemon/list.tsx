@@ -1,4 +1,4 @@
-import { Button, Checkbox, Switch } from "antd";
+import { Button, Checkbox, Switch , Image} from "antd";
 import React, { useEffect, useState } from 'react';
 import { StarOutlined, StarFilled,UserOutlined } from '@ant-design/icons';
 import { Spin, Table } from 'antd';
@@ -7,6 +7,7 @@ import Search from 'antd/es/input/Search';
 
 import { useSelector } from 'react-redux';
 import { CheckboxChangeEvent } from "antd/es/checkbox";
+import { getPokemonImage } from "../../endpoints/pokemon";
 
 
 const ListPokemon: React.FC = () => {
@@ -16,16 +17,41 @@ const ListPokemon: React.FC = () => {
    const [pokemons, setPokemons] = useState<any>();
    const [firstCopy, setFirstCopy] = useState<any>();
    const [isChecked, setIsChecked] = useState(false);
-
+   
     const getPokemons = () => {  
-              setFirstCopy(posts);
-              setIsLoading(false);
+      fetchImages(posts);        
+      setFirstCopy(posts);
             };
+    const fetchImages = (url: any) =>{ 
+      
+      let imageUrl = new Array(url.length)
+      posts.forEach(async (element:any) => {
+       getPokemonImage(element.url).then((res:any)=> 
+      //  posts.filter(function(x:any) { 
+      //       x.url = res?.data?.sprites?.back_default;
+      //       return posts},
+      //       setPokemons([...posts]) 
+       
+      //  )
+      {for (var i = 0; i < posts.length; ++i) {
+        if (posts[i].url == element.url) {
+          posts[i].url = res?.data?.sprites?.back_default;
+        }
+    }
+    setPokemons([...posts]) 
+  }
+       )
+      });
+    }
+
+
+
         useEffect(()=>{
             getPokemons();
-            },[loadin]);
+            
+            },[loading]);
+
         useEffect(()=>{
-          
             setPokemons([...posts]);
         },[loading])
 
@@ -72,9 +98,19 @@ const ListPokemon: React.FC = () => {
           sorter: (a : any, b: any) => a.name.localeCompare(b.title)
         },
         {
-          title: 'Url',
-          dataIndex: 'url',
-          key: 'url',
+          title: 'Image',
+          render: (item: any) =>{
+            return (
+                <div className='items-center'>
+                  <Image
+                            key={item.id}
+                            height={50}
+                            width={50}
+                            src={item.url}
+                         /> 
+                 </div>
+            )
+        }
         },
         {
           title: 'Favorite',

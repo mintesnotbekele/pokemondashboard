@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as types from "./actionTypes";
-import { getPokemonData } from "../endpoints/pokemon";
+import { getPokemonData ,   } from "../endpoints/pokemon";
 
 const fetchPostStart=()=>({
     type: types.FETCH_POST_START,
