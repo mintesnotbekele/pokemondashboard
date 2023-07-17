@@ -23,16 +23,8 @@ const ListPokemon: React.FC = () => {
       setFirstCopy(posts);
             };
     const fetchImages = (url: any) =>{ 
-      
-      let imageUrl = new Array(url.length)
       posts.forEach(async (element:any) => {
        getPokemonImage(element.url).then((res:any)=> 
-      //  posts.filter(function(x:any) { 
-      //       x.url = res?.data?.sprites?.back_default;
-      //       return posts},
-      //       setPokemons([...posts]) 
-       
-      //  )
       {for (var i = 0; i < posts.length; ++i) {
         if (posts[i].url == element.url) {
           posts[i].url = res?.data?.sprites?.back_default;
@@ -43,9 +35,6 @@ const ListPokemon: React.FC = () => {
        )
       });
     }
-
-
-
         useEffect(()=>{
             getPokemons();
             
@@ -71,7 +60,7 @@ const ListPokemon: React.FC = () => {
       const onChange = (e: CheckboxChangeEvent) => {
          if(e.target.checked == true)
          {
-             console.log(`checked = ${e.target.checked}`);
+          
              setIsChecked(true);
             setPokemons([...pokemons.filter(function(x:any) { return x.isfavorite == true}  )])
          }
@@ -117,7 +106,7 @@ const ListPokemon: React.FC = () => {
           render: (item: any) =>{
               return (
                   <div className='items-center'>
-                   <Button onClick={()=>changeFavorite(item)}>{item.isfavorite == true ?  <StarFilled/>: <StarOutlined/>}</Button>
+                   <Button onClick={()=>changeFavorite(item)}>{item.isfavorite == true ?  <StarFilled style={{color: "#fcc603"}}/>: <StarOutlined/>}</Button>
                   </div>
               )
           }

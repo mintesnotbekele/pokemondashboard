@@ -92,7 +92,7 @@ const ListGridPokemon: React.FC = () => {
                          /> 
                          <p>{item.name}</p>
                          <hr/>
-                         <Button onClick={()=>changeFavorite(item)}>{item.isfavorite == true ?  <StarFilled/>: <StarOutlined/>}</Button>
+                         <Button onClick={()=>changeFavorite(item)}>{item.isfavorite == true ?   <StarFilled style={{color: "#fcc603"}}/>: <StarOutlined/>}</Button>
                          </div>))}
                          </div>
                          </>} 

@@ -81,7 +81,7 @@ const ListFavorites: React.FC = () => {
           render: (item: any) =>{
               return (
                   <div className='items-center'>
-                 <Button onClick={()=>changeFavorite(item)}>{item.isfavorite == true ?  <StarFilled/>: <StarOutlined/>}</Button>
+                 <Button onClick={()=>changeFavorite(item)}>{item.isfavorite == true ?   <StarFilled style={{color: "#fcc603"}}/>: <StarOutlined/>}</Button>
                   
                   </div>
               )
