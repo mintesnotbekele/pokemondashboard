@@ -24,13 +24,13 @@ const FavoriteGridPokemon: React.FC = () => {
 
 
     const changeFavorite = (rec: pokemon) =>{  
-        posts.filter(function(x:any) { 
+        posts.filter(function(x:pokemon) { 
             if(x.id == rec.id)
             {
                 x.isfavorite = !rec.isfavorite;
             }
             return posts} );
-            setFavoritePokemons(posts.filter(function(x:any) { return x.isfavorite == true}));
+            setFavoritePokemons(posts.filter(function(x:pokemon) { return x.isfavorite == true}));
         }
   
     const renameFavorite = (rec:any)=>{
@@ -41,10 +41,10 @@ const FavoriteGridPokemon: React.FC = () => {
             x.name = renameValue;
         }
         return posts} );
-        setFavoritePokemons(posts.filter(function(x:any) { return x.isfavorite == true}));
+        setFavoritePokemons(posts.filter(function(x:pokemon) { return x.isfavorite == true}));
     }
     useEffect(()=>{
-        setFavoritePokemons(posts.filter(function(x:any) { return x.isfavorite == true}));
+        setFavoritePokemons(posts.filter(function(x:pokemon) { return x.isfavorite == true}));
        },[loading])
 
   const toggleRename=(rec:any)=>
@@ -75,7 +75,7 @@ const FavoriteGridPokemon: React.FC = () => {
                     {loading ? <Spin />:
                          <>
                          <div className="row">
-                         {favoritePokemons?.map((item: any) => (
+                         {favoritePokemons?.map((item: pokemon | any) => (
                          <div style={{float: 'left',margin: '10px', alignItems: "start", borderStyle: "solid", borderWidth: "3px",borderRadius: "30%",padding: "10px", width: "140px"}}>
                         
                         <Modal title="Rename Pokemon" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
