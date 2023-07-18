@@ -8,6 +8,12 @@ import rootReducer from './rootReducer';
 const middlewares = [logger,thunk];
 
 
+
 const store = createStore(rootReducer, applyMiddleware(...middlewares));
+
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+
 
 export default store;

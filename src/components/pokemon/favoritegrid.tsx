@@ -4,23 +4,26 @@ import { StarOutlined, StarFilled, EditOutlined } from '@ant-design/icons';
 import { Spin, Table } from 'antd';
 import logo from '../../assets/pokemon.png'
 
-
+import { RootState } from '../../redux/store';
 import Search from 'antd/es/input/Search';
 
 import { useSelector } from 'react-redux';
 import { CheckboxChangeEvent } from "antd/es/checkbox";
+import { pokemon } from "../../types/types";
+
+
 
 
 const FavoriteGridPokemon: React.FC = () => {
     
     const [favoritePokemons, setFavoritePokemons] = useState<any>();
-    const {posts, loading} = useSelector((state: any) => state.data); 
+    const {posts, loading} = useSelector((state : RootState) => state.data); 
     const [renamed, setRenamed] = useState([]);
-    const [renameValue, setRenameValue]= useState();
+    const [renameValue, setRenameValue]= useState("");
    
 
 
-    const changeFavorite = (rec: any) =>{  
+    const changeFavorite = (rec: pokemon) =>{  
         posts.filter(function(x:any) { 
             if(x.id == rec.id)
             {
@@ -52,7 +55,7 @@ const FavoriteGridPokemon: React.FC = () => {
    
   const [isModalOpen, setIsModalOpen] = useState(false);
   
-  const handleChange=(event: any)=>{
+  const handleChange=(event: React.ChangeEvent<HTMLInputElement>)=>{
         setRenameValue(event.target.value);
   }
 
@@ -82,6 +85,7 @@ const FavoriteGridPokemon: React.FC = () => {
                             key={item.id}
                             height={50}
                             width={50}
+                            alt="Pokemon Image"
                             src={item.url}
                          /> 
                          <p>{item.name}</p>

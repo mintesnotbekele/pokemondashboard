@@ -1,10 +1,10 @@
-import axios from "axios";
+
 import { pokemonEndPoint } from "./pokemon.endpoints";
 import { httpService } from "../helpers/api-helper";
 
-export const getPokemonData = (data: any): any => {
+export const getPokemonData = () => {
   return httpService
-    .get(`${pokemonEndPoint.getPokemons}`, { params: data })
+    .get(`${pokemonEndPoint.getPokemons}`)
     .then((response:any) => {
       return response;
     })

@@ -8,11 +8,13 @@ import Search from 'antd/es/input/Search';
 import { useSelector } from 'react-redux';
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { getPokemonImage } from "../../endpoints/pokemon";
+import { RootState } from "../../redux/store";
+import { pokemon } from "../../types/types";
 
 
 const ListPokemon: React.FC = () => {
     
-   const {posts, loading} = useSelector((state: any) => state.data); 
+   const {posts, loading} = useSelector((state: RootState) => state.data); 
    const [loadin, setIsLoading] = useState(false); 
    const [pokemons, setPokemons] = useState<any>();
    const [firstCopy, setFirstCopy] = useState<any>();
@@ -22,8 +24,8 @@ const ListPokemon: React.FC = () => {
       fetchImages(posts);        
       setFirstCopy(posts);
             };
-    const fetchImages = (url: any) =>{ 
-      posts.forEach(async (element:any) => {
+    const fetchImages = (url: pokemon) =>{ 
+      posts.forEach(async (element:pokemon) => {
        getPokemonImage(element.url).then((res:any)=> 
       {for (var i = 0; i < posts.length; ++i) {
         if (posts[i].url == element.url) {
@@ -46,8 +48,8 @@ const ListPokemon: React.FC = () => {
 
 
 
-   const changeFavorite = (rec: any) =>{  
-      posts.filter(function(x:any) { 
+   const changeFavorite = (rec: pokemon) =>{  
+      posts.filter(function(x:pokemon) { 
           if(x.id == rec.id)
           {
               x.isfavorite = !rec.isfavorite;
@@ -62,7 +64,7 @@ const ListPokemon: React.FC = () => {
          {
           
              setIsChecked(true);
-            setPokemons([...pokemons.filter(function(x:any) { return x.isfavorite == true}  )])
+            setPokemons([...pokemons.filter(function(x:pokemon) { return x.isfavorite == true}  )])
          }
          else 
          {
@@ -75,7 +77,7 @@ const ListPokemon: React.FC = () => {
          if(value == " " || value == "")
          setPokemons(firstCopy);
          else
-         setPokemons([...pokemons?.filter((x:any) => (x.name.includes(value)))])
+         setPokemons([...pokemons?.filter((x:pokemon) => (x.name.includes(value)))])
    };
    
 
@@ -84,17 +86,18 @@ const ListPokemon: React.FC = () => {
           title: 'Name',
           dataIndex: 'name',
           key: 'name',
-          sorter: (a : any, b: any) => a.name.localeCompare(b.title)
+          sorter: (a : pokemon, b: pokemon) => a.name.localeCompare(b.name)
         },
         {
           title: 'Image',
-          render: (item: any) =>{
+          render: (item: pokemon| any) =>{
             return (
                 <div className='items-center'>
                   <Image
                             key={item.id}
                             height={50}
                             width={50}
+                            alt="Pokemon Image"
                             src={item.url}
                          /> 
                  </div>
@@ -103,7 +106,7 @@ const ListPokemon: React.FC = () => {
         },
         {
           title: 'Favorite',
-          render: (item: any) =>{
+          render: (item: pokemon) =>{
               return (
                   <div className='items-center'>
                    <Button onClick={()=>changeFavorite(item)}>{item.isfavorite == true ?  <StarFilled style={{color: "#fcc603"}}/>: <StarOutlined/>}</Button>

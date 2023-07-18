@@ -17,7 +17,7 @@ const fetchPostFail=(error: any)=>({
 export function fetchPosts(){
     return function(dispatch: any){
         dispatch(fetchPostStart());
-        getPokemonData({0: Number,1000: Number})
+        getPokemonData()
         .then((response : any)=>{
             const posts = response.data.results;
             posts.forEach((value: any, idx: number) => 

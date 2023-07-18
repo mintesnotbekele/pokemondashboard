@@ -87,6 +87,7 @@ const ListGridPokemon: React.FC = () => {
                          <Image
                             key={item.id}
                             height={50}
+                            alt="Pokemon Image"
                             width={50}
                             src={item.url}
                          /> 

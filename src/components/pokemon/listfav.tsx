@@ -70,6 +70,7 @@ const ListFavorites: React.FC = () => {
                             key={item.id}
                             height={50}
                             width={50}
+                            alt="Pokemon Image"
                             src={item.url}
                          /> 
                  </div>
